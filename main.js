@@ -9,6 +9,21 @@ TREEMAP_WIDTH = 1200 - margin.left - margin.right,
 const treemapContainer = d3.select('#treemap-container');
 const lineaChartContainer = d3.select('#linea-chart-container')
 
+const svg_histogram = lineaChartContainer
+  .append('svg')
+    .attr("width", TREEMAP_WIDTH + margin.left + margin.right)
+    .attr("height", TREEMAP_HEIGHT + margin.top + margin.bottom)
+
+const g = svg_histogram.append("g")
+  .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+const xAxis = svg_histogram.append("g")
+  .attr('transform', `translate(${margin.left * 4}, ${TREEMAP_HEIGHT})`);
+
+const yAxis = svg_histogram.append("g")
+  .attr('transform', `translate(${margin.left * 4}, ${margin.top})`);
+
+
 d3.csv(SPORTS_COUNT_CSV, parseSportCount).then((sports) => {
   d3.csv(ATLETAS_TODOS_EVENTO_SIN_PAIS_CSV, parseAtletasTodosEventoSinPais).then((atletasSinPais) => {
     d3.csv(ATLETAS_TODOS_EVENTO_CON_PAIS_CSV, parseAtletasTodosEventoConPais). then((atletasConPais) => {
@@ -122,8 +137,8 @@ function createTreeMap(data) {
     data_enter.on('mouseover', (e, d) => mouseOver(e, d))
 
     data_enter.on('click', (e, d) => {
-      createHistogramSport(d.id)
       data_enter.attr('opacity', (data) => data.id === d.id ? 1 : 0.7)
+      createHistogramSport(d.id)
     })
 
   });
@@ -146,8 +161,6 @@ function createTreeMap(data) {
   }
 
   function createHistogramSport(sportData) {
-    console.log(`Clickeaste: ${sportData}`);
-    console.log(`Todos los atletas ${atletasTodosEventoSinPais.length}`);
     const filteredAthletesForSport = atletasTodosEventoSinPais.filter(a => sportData === a.Sport);
     atletasDataJoin(filteredAthletesForSport);
   };
@@ -155,87 +168,79 @@ function createTreeMap(data) {
 };
 
 function atletasDataJoin(data) {
-  console.log(`Data de atletas en deporte filtrado: ${data.length}`)
 
-  const svg_histogram = lineaChartContainer
-  .append('svg')
-  .attr("width", TREEMAP_WIDTH + margin.left + margin.right)
-  .attr("height", TREEMAP_HEIGHT + margin.top + margin.bottom)
-  
-  svg_histogram.append("g")
-      .attr("transform", 
-            "translate(" + margin.left + "," + margin.top + ")");
-
-  const yAxis = d3
+  const escalaY = d3
     .scaleLinear()
     .domain([0, d3.max(data, d => d.numero_deportistas)])
     .range([TREEMAP_HEIGHT - margin.top, 0])
 
-  svg_histogram.append("g")
-    .call(d3.axisLeft(yAxis))
+  yAxis.transition().duration(2000)
+    .call(d3.axisLeft(escalaY))
     .attr("transform", 
           "translate(" + margin.left*4 + "," + margin.top + ")")
 
-  const xAxis = d3
+  const escalaX = d3
     .scaleLinear()
     .domain([d3.min(data, d => d.Year), d3.max(data, d => d.Year)])
     .range([0, TREEMAP_WIDTH - margin.right*8])
 
 
-  svg_histogram.append("g")
-    .call(d3.axisBottom(xAxis).tickFormat(d3.format("d")))
+  xAxis.transition().duration(2000)
+    .call(d3.axisBottom(escalaX).tickFormat(d3.format("d")))
     .attr("transform", "translate(" + margin.left * 4 + "," + (TREEMAP_HEIGHT) + ")")
 
-  const rad = 10
-
-
-  const deporteEspecifico = svg_histogram
-    .selectAll("g")
+  g
+    .selectAll("path")
     .data(data)
     .join(
       (enter) => {
 
-      const data_enter = enter.append("g")
-      console.log(`data: ${data}`)
-      console.log(`data_enter: ${data_enter}`)
-
-
-      line = data_enter.append("path")
-        .datum(data)
-        .attr("d", d3.line()
-          .x(d => xAxis(d.Year))
-          .y(d => yAxis(d.numero_deportistas))
-        )
-        .transition()
-        .duration(2000)
-        .attr('fill', 'none')
-        .attr("stroke", "black")
-        .attr("stroke-width", 2)
-        .attr("transform", 
-          "translate(" + margin.left * 4 + "," + margin.top + ")")
-
-        circle = data_enter.append('circle')
-          .attr('cx', d => xAxis(d.Year))
-          .attr('cy', d => yAxis(d.numero_deportistas))
-          .attr('r', rad)
-          .style("fill", "#69b3a2")
-          .attr("transform", 
-            "translate(" + margin.left*4 + "," + margin.top + ")")
-  
-        circle.on('mouseover', (e, d) => mouseOverCircle(e, d))
-
-      
-      },
-      (update) => {
-        update
+        line = enter.append("path")
+          .datum(data)
+          .attr("d", d3.line()
+            .x(d => escalaX(d.Year))
+            .y(d => escalaY(d.numero_deportistas))
+          )
           .transition()
           .duration(2000)
-          .attr("d", d3.line()
-            .x(d => xAxis(d.Year))
-            .y(d => yAxis(d.numero_deportistas))
-          )
-      },
+          .attr('fill', 'none')
+          .attr("stroke", "black")
+          .attr("stroke-width", 2)
+          .attr("transform", 
+            "translate(" + margin.left * 4 + "," + margin.top + ")")
+        
+        },
+        (update) => {
+          update
+            .datum(data)
+            .transition()
+            .duration(2000)
+            .attr("d", d3.line()
+              .x(d => escalaX(d.Year))
+              .y(d => escalaY(d.numero_deportistas))
+            )
+            .attr('fill', 'none')
+            .attr("stroke", "black")
+            .attr("stroke-width", 2)
+            .attr("transform", 
+              "translate(" + margin.left * 4 + "," + margin.top + ")")
+        },
     )
+
+  
+
+    // circle = enter.append('circle')
+          //   .attr('cx', d => xAxis(d.Year))
+          //   .attr('cy', d => yAxis(d.numero_deportistas))
+          //   .transition()
+          //   .duration(2000)
+          //   .attr('r', rad)
+          //   .style("fill", "#69b3a2")
+          //   .attr("transform", 
+          //     "translate(" + margin.left*4 + "," + margin.top + ")")
+            
+    
+          // circle.on('mouseover', (e, d) => mouseOverCircle(e, d))
 
 
   function mouseOverCircle(event, d) {

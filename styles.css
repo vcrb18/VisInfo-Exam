@@ -26,6 +26,11 @@ body {
   border: 2px solid yellow;
 }
 
+#filtro {
+  text-align: center;
+  margin: auto;
+}
+
 #linea-chart-container {
   align-self: center;
   margin-top: 5%;
@@ -70,4 +75,9 @@ li span {
   height: 700;
   width: 400;
   margin-top: 5%;
+}
+
+.selected {
+  stroke: red;
+  stroke-width: 5;
 }

@@ -12,6 +12,10 @@ INFO_HEIGHT =  700
 
 const treemapContainer = d3.select('#treemap-container');
 const lineaChartContainer = d3.select('#linea-chart-container')
+const dropDownContainer = d3.select("#filtro")
+  .append("select")
+  .attr("class", "selection")
+  .attr("name", "country-list");
 
 const svg_histogram = lineaChartContainer
   .append('svg')
@@ -171,6 +175,8 @@ function createTreeMap(data) {
   function createHistogramSport(sportData) {
     const filteredAthletesForSport = atletasTodosEventoSinPais.filter(a => sportData === a.Sport);
     atletasDataJoin(filteredAthletesForSport);
+    const filteredAthletesForDropDown = atletasTodosEventoConPais.filter(a => sportData === a.Sport)
+    dropDown(filteredAthletesForDropDown);
   };
 
 };
@@ -254,7 +260,6 @@ function atletasDataJoin(data) {
           .attr('r', 10)
           .style("fill", "#69b3a2")
           .attr('id', d => 'circle-' + d.id)
-          // .attr('id', d => 'circle-' + d.id)
           .attr("transform", 
             "translate(" + margin.left*4 + "," + margin.top + ")")
               
@@ -275,6 +280,12 @@ function atletasDataJoin(data) {
     )
 
   function mouseMoveCircle(event, d) {
+    const circle = event.target.id;
+    d3.select('#' + circle)
+      .attr("stroke", d => 'red')
+      .attr("stroke-width", 3)
+
+
     const mousePosition = d3.pointer(event);
 
     circleTooltip.select("#year").html(d.Year)
@@ -291,15 +302,45 @@ function atletasDataJoin(data) {
   }
 
   function mouseOutCircle(event, d) {
+    const circle = event.target.id
+    const colorDelCirculo = d3.select('#' + circle).style('fill')
+    d3.select('#' + circle).attr("stroke", d => colorDelCirculo)
     circleTooltip.style('opacity', 0)
   }
 
   function circleClick(event, d) {
     const circle = event.target.id;
     console.log(`CIRCLE: ${circle}`)
-    d3.select('#' + circle).style("fill", d => 'red')
+    d3.select(".selected").classed("selected", false);
+    d3.select('#' + circle).classed("selected", true);
+
+    const keys = ["edad-promedio", "altura-promedio"]
+    d3.select('#edad-promedio').text(`Edad promedio: ${d.edad_promedio}`)
+    d3.select('#altura-promedio').text(`Altura promedio: ${d.altura_promedio}`)
+
+    console.log(infos)
   }
 
   const circleTooltip = d3.select('#tooltip');
 
 };
+
+function dropDown(data) {
+  var countries = [];
+  for (var i in data) {
+    countries.push(data[i].Team);
+  }
+
+  dropDownContainer
+  // .append("select")
+  //   .attr("class", "selection")
+  //   .attr("name", "country-list")
+  //   // .style("display", "none")
+  .selectAll("option")
+    .data(data)
+    .enter()
+    .append("option")
+      .text(d => d.Team)
+      .attr("value", d => d.Team)
+  
+}

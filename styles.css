@@ -1,0 +1,27 @@
+body {
+  width: 95%;
+  border: solid 2px red;
+  margin: auto;
+}
+
+#app {
+  border: solid 2px blue;
+  width: 95%;
+  margin: auto;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+#treemap-container {
+  align-self: center;
+  margin-top: 1%;
+  border: solid 3px;
+}
+
+#linea-chart-container {
+  align-self: center;
+  margin-top: 5%;
+  border: solid 3px;
+}
+

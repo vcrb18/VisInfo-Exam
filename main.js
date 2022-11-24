@@ -227,27 +227,49 @@ function atletasDataJoin(data) {
         },
     )
 
+  g
+    .selectAll("circle")
+    .data(data)
+    .join(
+      (enter) => {
+
+        circle = enter.append('circle')
+          .attr('cx', d => escalaX(d.Year))
+          .attr('cy', d => escalaY(d.numero_deportistas))
+          .transition()
+          .duration(2000)
+          .attr('r', 10)
+          .style("fill", "#69b3a2")
+          .attr("transform", 
+            "translate(" + margin.left*4 + "," + margin.top + ")")
+          // .on('mouseover', (e, d) => mouseOverCircle(e, d))
+
+        // circle.transition().duration(2000)
+        
+        // circle.on('mouseover', (e, d) => mouseOverCircle(e, d))
+              
+      },
+      (update) => {
+        update
+          .transition()
+          .duration(2000)
+          .attr('cx', d => escalaX(d.Year))
+          .attr('cy', d => escalaY(d.numero_deportistas))
+          .attr('r', 10)
+          .style("fill", "#69b3a2")
+          .attr("transform", 
+            "translate(" + margin.left*4 + "," + margin.top + ")")
+      },
+
+        
+    )
+        
   
-
-    // circle = enter.append('circle')
-          //   .attr('cx', d => xAxis(d.Year))
-          //   .attr('cy', d => yAxis(d.numero_deportistas))
-          //   .transition()
-          //   .duration(2000)
-          //   .attr('r', rad)
-          //   .style("fill", "#69b3a2")
-          //   .attr("transform", 
-          //     "translate(" + margin.left*4 + "," + margin.top + ")")
-            
-    
-          // circle.on('mouseover', (e, d) => mouseOverCircle(e, d))
-
 
   function mouseOverCircle(event, d) {
     console.log(`Este circulo representa el evento: ${event}`)
     console.log(`Este circulo representa el d: ${d.Year}`)
     console.log(`Promedio de altura: ${d.altura_promedio}cm`)
-
-
   }
+
 };

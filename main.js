@@ -6,6 +6,10 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
 TREEMAP_WIDTH = 1200 - margin.left - margin.right,
   TREEMAP_HEIGHT = 725 - margin.top - margin.bottom;
 
+INFO_WIDTH =  1000
+INFO_HEIGHT =  700
+
+
 const treemapContainer = d3.select('#treemap-container');
 const lineaChartContainer = d3.select('#linea-chart-container')
 
@@ -64,7 +68,8 @@ function parseAtletasTodosEventoSinPais (d) {
     Sport: d.Sport,
     edad_promedio: +d.edad_promedio,
     altura_promedio: +d.altura_promedio,
-    numero_deportistas: +d.numero_deportistas
+    numero_deportistas: +d.numero_deportistas,
+    id: +d.id
   }
   return data;
 }
@@ -115,7 +120,7 @@ function createTreeMap(data) {
       .attr('width', d => (d.x1 - d.x0))
       .attr('height', d => (d.y1 - d.y0))
       .style("stroke", "black")
-      .style("fill", d => sportColor(d.id));
+      .style("fill", d => sportColor(d.id))
 
     nombre_deporte = data_enter.append("text")
       .attr('x', d => d.x0 + (d.x1 - d.x0)/2)
@@ -134,7 +139,10 @@ function createTreeMap(data) {
       .attr("fill", "black")
       .style("text-anchor", "middle")
 
-    data_enter.on('mouseover', (e, d) => mouseOver(e, d))
+    // data_enter.on('mouseover', (e, d) => mouseOver(e, d))
+    // data_enter.on('mouseover'), (e, d) => {
+    //   data_enter.attr('opacity', '.85')
+    // }
 
     data_enter.on('click', (e, d) => {
       data_enter.attr('opacity', (data) => data.id === d.id ? 1 : 0.7)
@@ -189,6 +197,8 @@ function atletasDataJoin(data) {
     .call(d3.axisBottom(escalaX).tickFormat(d3.format("d")))
     .attr("transform", "translate(" + margin.left * 4 + "," + (TREEMAP_HEIGHT) + ")")
 
+  // const circleTooltip = d3.select('#tooltip')
+
   g
     .selectAll("path")
     .data(data)
@@ -236,17 +246,17 @@ function atletasDataJoin(data) {
         circle = enter.append('circle')
           .attr('cx', d => escalaX(d.Year))
           .attr('cy', d => escalaY(d.numero_deportistas))
+          .on('mousemove', (e, d) => mouseMoveCircle(e, d))
+          .on('mouseout',  (e, d) => mouseOutCircle(e, d))
+          .on('click', (e, d) => circleClick(e, d))
           .transition()
           .duration(2000)
           .attr('r', 10)
           .style("fill", "#69b3a2")
+          .attr('id', d => 'circle-' + d.id)
+          // .attr('id', d => 'circle-' + d.id)
           .attr("transform", 
             "translate(" + margin.left*4 + "," + margin.top + ")")
-          // .on('mouseover', (e, d) => mouseOverCircle(e, d))
-
-        // circle.transition().duration(2000)
-        
-        // circle.on('mouseover', (e, d) => mouseOverCircle(e, d))
               
       },
       (update) => {
@@ -263,13 +273,33 @@ function atletasDataJoin(data) {
 
         
     )
-        
-  
 
-  function mouseOverCircle(event, d) {
-    console.log(`Este circulo representa el evento: ${event}`)
-    console.log(`Este circulo representa el d: ${d.Year}`)
-    console.log(`Promedio de altura: ${d.altura_promedio}cm`)
+  function mouseMoveCircle(event, d) {
+    const mousePosition = d3.pointer(event);
+
+    circleTooltip.select("#year").html(d.Year)
+    circleTooltip.select("#athletes").html(d.numero_deportistas)
+
+    const x = mousePosition[0] + margin.left;
+    const y = mousePosition[1] + margin.top;
+
+    circleTooltip.style(
+      "transform",
+      `translate(` + `calc( 30% + ${x}px),` + `calc(30% + ${y}px)` + `)`
+    )
+      .style('opacity', 1)
   }
+
+  function mouseOutCircle(event, d) {
+    circleTooltip.style('opacity', 0)
+  }
+
+  function circleClick(event, d) {
+    const circle = event.target.id;
+    console.log(`CIRCLE: ${circle}`)
+    d3.select('#' + circle).style("fill", d => 'red')
+  }
+
+  const circleTooltip = d3.select('#tooltip');
 
 };

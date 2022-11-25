@@ -15,7 +15,8 @@ const lineaChartContainer = d3.select('#linea-chart-container')
 const dropDownContainer = d3.select("#filtro")
   .append("select")
   .attr("class", "selection")
-  .attr("name", "country-list");
+  .attr("name", "country-list")
+  
 
 const svg_histogram = lineaChartContainer
   .append('svg')
@@ -173,10 +174,10 @@ function createTreeMap(data) {
   }
 
   function createHistogramSport(sportData) {
+    const filteredAthletesForDropDown = atletasTodosEventoConPais.filter(a => sportData === a.Sport);
+    dropDown(filteredAthletesForDropDown);
     const filteredAthletesForSport = atletasTodosEventoSinPais.filter(a => sportData === a.Sport);
     atletasDataJoin(filteredAthletesForSport);
-    const filteredAthletesForDropDown = atletasTodosEventoConPais.filter(a => sportData === a.Sport)
-    dropDown(filteredAthletesForDropDown);
   };
 
 };
@@ -325,19 +326,24 @@ function atletasDataJoin(data) {
 
   const circleTooltip = d3.select('#tooltip');
 
-  const teamSelector = d3.select('#filtro').on('change', onChange)
+  const teamSelector = d3.select('#filtro').on('change', onChange(data))
 
-  function onChange() {
+  // En el data viene el deporte
+  function onChange(data) {
+    sport = data[0].Sport
     team = d3.select('#filtro')
       .select('option')
         .property('value')
+    console.log(`Sport = ${sport}`)
+    console.log(`Team  = ${team}`)
 
-    console.log(`Data: ${data[0].id}`)
+    const filteredSportFromBefore = atletasTodosEventoConPais.filter(a => sport === a.Sport);
+    const filteredTeam = filteredSportFromBefore.filter(a => team === a.team);
+    // atletasDataJoin(filteredTeam)
   }
 
 };
 
-let myAtletasDataJoin
 function dropDown(data) {
   dropDownContainer
     .selectAll("option")

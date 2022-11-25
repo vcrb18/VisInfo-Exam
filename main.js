@@ -281,6 +281,12 @@ function atletasDataJoin(data) {
 
         
     )
+  d3.select('#filtro').on("change", (event) => {
+    const team = event.target.value
+    sport = data[0].Sport
+    const filteredSportAndTeam = atletasTodosEventoConPais.filter(a => (sport === a.Sport && team === a.Team));
+    atletasDataJoin(filteredSportAndTeam)
+  })
 
   function mouseMoveCircle(event, d) {
     const circle = event.target.id;
@@ -326,16 +332,17 @@ function atletasDataJoin(data) {
 
   const circleTooltip = d3.select('#tooltip');
 
-  const teamSelector = d3.select('#filtro').on('change', onChange(data))
+  // const teamSelector = d3.select('#filtro').on('change', onChange(event))
 
   // En el data viene el deporte
-  function onChange(data) {
+  function onChange(event) {
+    const value = event.target.value
     sport = data[0].Sport
     team = d3.select('#filtro')
       .select('option')
         .property('value')
     console.log(`Sport = ${sport}`)
-    console.log(`Team  = ${team}`)
+    console.log(`Team  = ${value}`)
 
     const filteredSportFromBefore = atletasTodosEventoConPais.filter(a => sport === a.Sport);
     const filteredTeam = filteredSportFromBefore.filter(a => team === a.team);

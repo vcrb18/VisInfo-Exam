@@ -183,6 +183,8 @@ function createTreeMap(data) {
 
 function atletasDataJoin(data) {
 
+  // const teamSelector = d3.select('#filtro').on('change', onChange)
+
   const escalaY = d3
     .scaleLinear()
     .domain([0, d3.max(data, d => d.numero_deportistas)])
@@ -237,7 +239,7 @@ function atletasDataJoin(data) {
             )
             .attr('fill', 'none')
             .attr("stroke", "black")
-            .attr("stroke-width", 2)
+          .attr("stroke-width", 2)
             .attr("transform", 
               "translate(" + margin.left * 4 + "," + margin.top + ")")
         },
@@ -323,24 +325,26 @@ function atletasDataJoin(data) {
 
   const circleTooltip = d3.select('#tooltip');
 
-};
+  const teamSelector = d3.select('#filtro').on('change', onChange)
 
-function dropDown(data) {
-  var countries = [];
-  for (var i in data) {
-    countries.push(data[i].Team);
+  function onChange() {
+    team = d3.select('#filtro')
+      .select('option')
+        .property('value')
+
+    console.log(`Data: ${data[0].id}`)
   }
 
+};
+
+let myAtletasDataJoin
+function dropDown(data) {
   dropDownContainer
-  // .append("select")
-  //   .attr("class", "selection")
-  //   .attr("name", "country-list")
-  //   // .style("display", "none")
-  .selectAll("option")
-    .data(data)
-    .enter()
-    .append("option")
-      .text(d => d.Team)
-      .attr("value", d => d.Team)
+    .selectAll("option")
+      .data(data)
+      .enter()
+      .append("option")
+        .text(d => d.Team)
+        .attr("value", d => d.Team)
   
 }

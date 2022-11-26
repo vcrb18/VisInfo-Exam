@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Examen Vicente Cruz</title>
+</head>
+
+<body>
+    <header>
+        <h1>Informe Examen</h1>
+    </header>
+    <div id="informe-container">
+
+        <div id="nivel-uno">
+            <h2>Primer nivel: Caracterzación de dominio</h2>
+            <h3>Contexto de los datos</h3>
+            <p>Para este trabajo se utilizaron los siguientes tres dataset:</p>
+            <ul>
+                <li>deportes_jjoo.csv</li>
+                <li>atletas_todos_evento_con_pais.csv</li>
+                <li>atletas_todos_evento_sin_pais.csv</li>
+            </ul>
+            <p>Estos datos fueron creados con ayuda de la libería <a href="https://pandas.pydata.org/docs/">pandas</a> a partir de
+                un dataset inicial llamado <a href="https://docs.google.com/spreadsheets/d/1Alt45JvXWcAmx-C7aVCrl0hKHHwDC6D0/edit?rtpof=true#gid=1285693786">atletas_todos_evento</a>
+                ya procesado por el profesor Hernán Valdivieso</p>
+            <p>El dataset original contiene la información de cada evento donde un deportista participó en los juegos olímpicos a lo largo de la historia
+                y para todos los deportes que han existido. Dentro de este se puede obtener la edad, altura, peso, país, año y fecha del respectivo evento y deportista.
+                Luego, el csv <b>deportes_jjoo.csv</b> contiene el número promedio de deportistas que han asistido a cada deporte a lo largo de la historia
+                de los juegos olímpicos. En el csv además se puede observar una columna 'Parent' debido a que fue necesario agregar algún tipo de dato
+                padre para poder crear una jerarquización y así mostrar los datos en un treemap. Después el dataset <b>atletas_todos_evento_sin_pais</b>
+                presenta la agrupación de los datos originales por "Sport" y "Year", para así poder conocer el número de deportistas que asistió a cierto deporte
+                cierto año de juego olímpico en específico. Además de esto presenta el promedio de edad y altura para este grupo de deportistas.
+                Por último, el dataset <b>atletas_todos_evento_con_pais</b> presenta la misma información que la explicada recién, pero agrupada a un
+                tercer nivel, el equipo ("Team"). Es decir, se puede observar el número de deportistas por país, deporte y año, además de su promedio
+                de edad y altura.
+            </p>
+            <h3>Potencial uso de la herramienta y usuario objetivo</h3>
+            <p>El usuario objetivo al cual apunta esta herramienta es cualquier persona curiosa amante del deporte, fanática de los juegos olímpicos
+                y hasta quizás soñadora con ir a algún juego olímpico y conocer los atributos físicos básicos de los deportistas de cierta disciplina.
+                . En este caso, el autor
+                de esta herramienta, Vicente Cruz, ha sido deportista toda la vida y tenía mucha curiosidad por ver como se distribuían los deportes
+                en los juegos olímpicos, conocer los deportes rey de los juegos, y conocer cuáles son los atributos de los deportistas en temas de edad y altura (variable física de cada persona
+                la cual es incontrolable).
+            </p>
+            <p>Debido a lo explicado anteriormente, se espera que el usuario que utilice esta herramienta sea capaz de conocer cuáles son los deporte
+                rey de los juegos olímpicos al conocer el promedio de deportistas que asisten a cada deporte en los juegos olímpicos. También se espera
+                que pueda conocer como ha cambiado la asistencia de deportistas para un deporte específico a lo largo de los años, y dentro de estos grupos
+                conocer las características físicas básicas como la altura y edad promedio de estos.
+            </p>
+        </div>
+
+        <div id="nivel-dos">
+            <h2>Segundo nivel: Abstracción de datos y tareas</h2>
+        </div>
+
+        <div id="nivel-tres">
+
+        </div>
+
+        <div id="nivel-cuatro">
+
+        </div>
+
+    </div>
+</body>
+
+</html>

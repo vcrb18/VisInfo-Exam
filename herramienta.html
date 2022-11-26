@@ -14,27 +14,28 @@
 
 <body>
     <div id="app">
-
-        <div id="treemap-container"></div>
+        <h1 id="titulo-herramienta">JUEGOS OLÍMPICOS EN LA HISTORIA</h1>
+        <p id="descripcion-titulo">A continuación se observan la distribución de deportistas promedio por cada deporte a lo  largo de la historia de los juegos olímpicos.
+        </p>
+        <p id="descripcion-titulo">Prueba clickeando algún deporte y observa qué pasa!</p>
+        <div id="treemap-container">
+            
+        </div>
 
         <div id="segunda-vis">
+            
             <div id="filtro">
-                <!-- <label for="teams">Select Team</label>
-                <select name="teams" id="teams">
-                    <option value="NH">Northern hemisphere</option>
-                    <option value="SH">Southern hemisphere</option>
-                </select> -->
             </div>
             <div id="linea-chart-container">
                 <div id="tooltip">
-                    <ul>
+                    <ul id="tooltip-list">
                         <li> <span class="bullet-year">•</span> Año: <span id="year"></span></li>
                         <li> <span class="bullet-athletes">•</span> Número de deportistas: <span id="athletes"></span></li>
                     </ul>
                 </div>
             </div>
             <div id="info-container">
-                <h2>Información</h2>
+                <h2 id="informacion">Información</h2>
                 <p class="year-info" id="edad-promedio"></p> 
                 <p class="year-info" id="altura-promedio"></p> 
             </div>

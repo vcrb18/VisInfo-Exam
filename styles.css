@@ -1,11 +1,85 @@
 body {
-  width: 95%;
-  border: solid 2px red;
+  width: 90%;
   margin: auto;
+  font-family: 'IBM Plex Sans', sans-serif;
+  padding: 5%;
+  padding-top: 2%;
+  transition: opacity 2s;
+  background-color: #abd9e9;
+}
+
+#titulo-herramienta {
+  text-align:center;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  font-size:32px; letter-spacing:1px;
+  font-family:"Playfair Display", serif;
+  font-weight: 500;
+}
+
+#descripcion-titulo {
+  text-align: center;
+  color: #2c7bb6;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+header {
+  overflow: hidden;
+  background-color: #fdae61;
+  padding: 20px 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Traveling Typewriter', monospace;
+}
+
+h1 {
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+h2 {
+  margin-top: 6%;
+  border-left: 6px solid #2c7bb6;
+  padding-left: 5px;
+  transition: all 200ms;
+}
+
+#informacion {
+  margin-top: 6%;
+  padding-left: 5px;
+  border-left: 0px solid;
+  opacity: 0;
+}
+
+
+h3 {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
 }
 
 #app {
-  border: solid 2px blue;
   width: 95%;
   margin: auto;
   display: flex;
@@ -16,14 +90,12 @@ body {
 #treemap-container {
   align-self: center;
   margin-top: 1%;
-  border: solid 3px;
 }
 
 #segunda-vis {
   display: flex;
   flex-flow: row;
-  justify-content: space-between;
-  border: 2px solid yellow;
+  justify-content: center;
 }
 
 #filtro {
@@ -34,10 +106,9 @@ body {
 #linea-chart-container {
   align-self: center;
   margin-top: 5%;
-  border: solid 3px;
 }
 
-ul {
+#tooltip-list {
   list-style: none;
   text-align: left;
   margin: 0;
@@ -55,7 +126,6 @@ li span {
 }
 
 #tooltip {
-  /* visibility: hidden; */
   opacity: 0;
   position: absolute;
   padding: 0.6em 1em;
@@ -71,13 +141,25 @@ li span {
 }
 
 #info-container {
-  border: 3px solid green;
   height: 700;
   width: 400;
   margin-top: 5%;
+  display: flex;
+  flex-flow: column;
+  /* border: 2px solid #fdae61; */
+  /* background-color: #fdae61; */
+  border-radius: 20px;
+}
+
+#info-container p {
+  /* font-size: 150%; */
+}
+
+.year-info{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .selected {
-  stroke: red;
+  stroke: #d7191c;
   stroke-width: 5;
 }

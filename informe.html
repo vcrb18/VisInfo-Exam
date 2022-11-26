@@ -14,6 +14,7 @@
 <body>
     <header>
         <h1>Informe Examen</h1>
+        <h4>Vicente Cruz</h4>
     </header>
     <div id="informe-container">
 
@@ -57,14 +58,220 @@
 
         <div id="nivel-dos">
             <h2>Segundo nivel: Abstracción de datos y tareas</h2>
+            <h3>Abstracción de tareas</h3>
+            <h4>Tarea 1:</h4>
+            <p>Descubrir la distribución del número de deportistas por deporte (en este caso para los primeros 50 deportes) a lo largo de la historia de los juegos olímpicos.
+                Identificar cuáles han sido los "deporte rey" en los juegos olímpicos
+            </p>
+            <h4>Tarea 2:</h4>
+            <p>Explorar los distintos deportes de los juegos olímpicos y explorar la variación de deportistas a lo largo de la historia de los juegos olímpicos para cada deporte 
+                y también país en específico.
+            </p>
+            <h4>Tarea 3:</h4>
+            <p>Resumir el promedio de atributos físicos incontrolables de cada grupo de deportistas, los cuales serían la altura y edad promedio</p>
+            <h3>Abstracción de datos</h3>
+            <p>A nivel de tipos de datos singulares, se tienen presentes los siguientes</p>
+            <ul>
+                <li><b> Deporte (item):</b> Corresponden a cada fila del dataset  y contiene un atributo que describe el número de deportistas que será detallado más adelante.</li>
+                <li><b> Evento deportio por juego olimpico (item): </b> A diferencia del anterior, este corresponde a cada fila del detaset "atletas_todos_evento_con_pais" y
+                "atletas_todos_evento_sin_pais", dado que no es un deporte que ha existido en los juegos olimpicos, si no que es cada evento deporitvo para cada jeugo olímpico que 
+                ha habido. Ambos presentan una serie de atributos, de los cuales la mayoría son compartidos y serán detallados a continuación.</li>
+                <li> <b>Atributos: </b>En los dataset hay muchos datos singulares de tipo atributo, los cuales fueron nombrados anteriormente y serán explicados ahora.</li>
+            </ul>
+            <p>A nivel de <b>atributos</b>, los atributos presentes en el dataset y atingetnes a las tareas descritas anteriormente son:</p>
+            <ol>
+                <li>
+                    Count en "deportes_jjoo.csv"
+                    <p>
+                        Describe el número de deportistas promedio que ha asistido al deporte a lo largo de todos los juegos olímpicos de la historia.
+                    </p>
+                    <ul>
+                        <li><b>Ordenado</b>, dado que tinen un orden intrínseco otorgado por ser un número</li>
+                        <li><b>Cuantitativo</b>, porque existe una magnitud que sí permite una comparación aritmética.</li>
+                    </ul>
+                </li>
+                <li>
+                    Year en "atletas_todos_evento_con_pais.csv" y "atletas_todos_evento_sin_pais.csv"
+                    <p>
+                        Describe el año en que ocurrió el juego olímpico.
+                    </p>
+                    <ul>
+                        <li><b>Ordenado</b>, dado que los años tienen un orden intrínseco otorgado por ser numéricos y avanzar con el tiempo</li>
+                        <li><b>Cuantitativo</b>, porque es posible realizar operaciones aritméticas exactas entre años.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    Sport en "atletas_todos_evento_con_pais.csv" y "atletas_todos_evento_sin_pais.csv"
+                    <p>
+                        Describe el deporte específico del juego olímpico en cuestión.
+                    </p>
+                    <ul>
+                        <li><b>Categórico</b>, dado que los deportes no tienen un orden intrínseco que los ordene entre sí.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    Team en "atletas_todos_evento_con_pais.csv"
+                    <p>
+                        Describe al equipo que lleva determinado país para el deporte específico cierto año.
+                    </p>
+                    <ul>
+                        <li><b>Categórico</b>, dado que los países no tienen un orden intrínseco que los ordene entre sí.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    edad_promedio en "atletas_todos_evento_con_pais.csv" y "atletas_todos_evento_sin_pais.csv"
+                    <p>
+                        Describe la edad promedio del grupo de deportistas.
+                    </p>
+                    <ul>
+                        <li><b>Ordenado</b>, , dado que los años tienen un orden intrínseco otorgado por ser numéricos y avanzar con el tiempo</li>
+                        <li><b>Cuantitativo</b>, porque es posible realizar operaciones aritméticas exactas entre años.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    altura_promedio en "atletas_todos_evento_con_pais.csv" y "atletas_todos_evento_sin_pais.csv"
+                    <p>
+                        Describe la altura_promedio en centimetros del grupo de deportistas.
+                    </p>
+                    <ul>
+                        <li><b>Ordenado</b>, dado que la altura esta medida en metros y esto tiene un orden intrínseco otorgado al ser numérico</li>
+                        <li><b>Cuantitativo</b>, porque es posible realizar una comparación aritmética entre las diferentes alturas.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    numero_deportistas en "atletas_todos_evento_con_pais.csv" y "atletas_todos_evento_sin_pais.csv"
+                    <p>
+                        Describe el número de deportistas presentes en el ítem.
+                    </p>
+                    <ul>
+                        <li><b>Ordenado</b>, dado que tiene un orden intrínseco otorgado al ser numérico.</li>
+                        <li><b>Cuantitativo</b>, porque es posible realizar una comparación aritmética entre las diferentes cantidades de deportistas</li>
+                    </ul>
+                </li>
+            </ol>
+
         </div>
 
         <div id="nivel-tres">
+            <h2>Tercer nivel: Codificación visual y de interacción</h2>
 
-        </div>
+            <p>Para abordar las tareas específicadas, se utilizaron las siguientes marcas, canales, idioms visuales, idioms de interacción
+                y decisiones de diseño:
+            </p>
+            <ul>
 
-        <div id="nivel-cuatro">
+                <li>
+                    <h3>Partición en dos vistas (Decisión de diseño)</h3>
+                    <p>Para facilitar la interacción del usuario con la visualización, se ha utilizado dos vistas coordinadas.
+                        Así, arriba se tiene un treemap con todos los deportes, y al momento de seleccionar un deporte,
+                        se tiene abajo un gráfico de líneas conectado
+                    </p>
+                    <p>Esta decisión se enfoca en facilitar el cumplimiento de la <b>segunda y primera tarea principal</b>.</p>
+                </li>
 
+                <li>
+                    <h3>Treemap para representar distribución de deportes (Idiom de interacción)</h3>
+                    <p>Es posible navegar por la visualización a traves de un zoom, dado que el tamaño de los números y letras de los deportes 
+                        con menos deportistas son más pequeños, y de esta manera estos se podrán ver mejor.
+                    </p>
+                    <p>Esto tiene un interés en cumplir la <b>la primera tarea principal</b></p>
+                </li>
+
+                <li>
+                    <h3>Selección de deporte (idiom de interacción)</h3>
+                    <p>
+                        Se permite una selección de deportes, lo cual desplegará un gráfico de líneas conectado debajo del treemap.
+                    </p>
+                    <p>Esto permitirá cumplir la <b>primera y segunda tarea principal</b></p>
+                </li>
+
+                <li>
+                    <h3>Gráfico de lineas conectado (idiom de interacción) para representar el número de deportistas por deporte y año de juego olímpico</h3>
+                    <p>
+                        En la visualización de abajo se utiliza este gráfico para poder detallar la distribución del número de deportistas dado cierto deporte y año.
+                        Al pasar el cursor arriba de cada círculo, se puede observar detalladamente el valor que representa ese círculo en su respectiva posición horizontal y
+                        vertical, es decir, el año y el número exacto de deportistas.
+                    </p>
+                    <p>Esto permitirá cumplir la <b>segunda tarea principal</b></p>
+                </li>
+
+                <li>
+                    <h3>Selección de círculo (idiom de interacción)</h3>
+                    <p>
+                        Se permite una selección de cada círculo en el gráfico de línea conectado. Esto permitirá observar, a su derecha, el valor promedio de los atributos físicos de este grupo de deportistas, específicamente, la altura y edad promedio.
+                    </p>
+                    <p>De esta manera, el idiom permitirá apoyar al cumplimiento de la <b>segunda tarea principal</b>, pero en especial la <b>tercera tarea principal</b>.</p>
+                </li>
+
+                <li>
+                    <h3>Posición horizontal del círculo (Canal)</h3>
+                    <p>
+                        La posición horizontal de cada círculo codifica cada año en el que hubo un juego olímpico.
+                    </p>
+                    <p>Este canal ayuda a complementar la <b>segunda tarea principal</b></p>
+                </li>
+
+                <li>
+                    <h3>Posición vertical del círculo (Canal)</h3>
+                    <p>
+                        La posición vertical de cada círculo codifica el valor en dicho año
+                    </p>
+                    <p>Este canal ayuda a complementar la <b>segunda tarea principal</b></p>
+                </li>
+
+                <li>
+                    <h3>Color de los rectángulos para representar un valor categórico (canal)</h3>
+                    <p>
+                        En el treemap donde se pueden observar todos los deportes, se utiliza una paleta de 12 colores categóricos (la mayor cantidad de colores disponible)
+                        para representar a los deportes. Esto sen hizo aspi para cumplir de mejor manera posible con el principio de expresividad y tener coherencia entre la
+                        semántica del atributo (categórico) y el tipo de canal (identidad). 
+                    </p>
+                    <p>Esto ayuda a cumplir con la <b>primera tarea principal</b>.</p>
+                </li>
+
+                <li>
+                    <h3>Tamaño rectangulo en treemap para representar el número promedio de deportistas (Canal)</h3>
+                    <p>
+                        Para representar el número promedio de deportistas por deporte se utiliza el tamaño de cada rectángulo.
+                        Además el tamaño de la letra y el número también son proporcionales al tamaño del rectángulo.
+                    </p>
+                    <p>Esto ayuda a cumplir con la <b>primera tarea principal</b>.</p>
+                </li>
+
+                <li>
+                    <h3>Linea para representar numero de deportistas (Marca)</h3>
+                    <p>Se utiliza una linea para representar la variación del número de deportistas para cierto deporte a lo largo de los años.</p>
+                    <p>Esto se enfoca en cumplir con la <b>segunda tarea principal</b>.</p>
+                </li>
+
+                <li>
+                    <h3>Rectángulo para representar número de deportistas (Marca)</h3>
+                    <p>
+                        Se utiliza una marca bidimensional con dos dimensiones, largo y ancho para representar cada deporte que ha existido en toda la 
+                        historia de los juegos olímpicos.
+                    </p>
+                    <p>Esta marca ayuda a complementar la <b>primera tarea principal</b>.</p>
+                </li>
+
+                <li>
+                    <h3>Círculo para representar deportistas de cierto ítem. (Marca)</h3>
+                    <p>En el gráfico de línea conectado, se utiliza esta marca bidimensional para representar a estos deportistas. </p>
+                    <p>Esto ayudará en la <b>segunda y tercera tarea principal</b>.</p>
+                </li>
+
+                <li>
+                    <h3>Dropdown para filtrar el deporte seleccionado por país (Decisión de diseño)</h3>
+                    <p>Para poder filtrar el grupo de deportistas de cierto deporte se agregó un dropdown que permite seleccionar cierto país en específico.</p>
+                    <p>Esto decisión recae en apoyar a la <b>segunda tarea principal</b>.</p>
+                </li>
+
+
+            </ul>
         </div>
 
     </div>

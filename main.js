@@ -9,14 +9,12 @@ TREEMAP_WIDTH = 1200 - margin.left - margin.right,
 INFO_WIDTH =  1000
 INFO_HEIGHT =  700
 
-
 const treemapContainer = d3.select('#treemap-container');
 const lineaChartContainer = d3.select('#linea-chart-container')
 const dropDownContainer = d3.select("#filtro")
   .append("select")
   .attr("class", "selection")
   .attr("name", "country-list")
-  
 
 const svg_histogram = lineaChartContainer
   .append('svg')
@@ -31,7 +29,6 @@ const xAxis = svg_histogram.append("g")
 
 const yAxis = svg_histogram.append("g")
   .attr('transform', `translate(${margin.left * 4}, ${margin.top})`);
-
 
 d3.csv(SPORTS_COUNT_CSV, parseSportCount).then((sports) => {
   d3.csv(ATLETAS_TODOS_EVENTO_SIN_PAIS_CSV, parseAtletasTodosEventoSinPais).then((atletasSinPais) => {
@@ -84,7 +81,7 @@ function createTreeMap(data) {
   const sportColor = d3
     .scaleOrdinal()
     .domain(data.map(d => d.Sport))
-    .range(d3.schemeSet2)
+    .range(d3.schemePaired)
 
   const stratify = d3
     .stratify()
@@ -144,11 +141,6 @@ function createTreeMap(data) {
       .attr("fill", "black")
       .style("text-anchor", "middle")
 
-    // data_enter.on('mouseover', (e, d) => mouseOver(e, d))
-    // data_enter.on('mouseover'), (e, d) => {
-    //   data_enter.attr('opacity', '.85')
-    // }
-
     data_enter.on('click', (e, d) => {
       data_enter.attr('opacity', (data) => data.id === d.id ? 1 : 0.7)
       createHistogramSport(d.id)
@@ -184,8 +176,6 @@ function createTreeMap(data) {
 
 function atletasDataJoin(data) {
 
-  // const teamSelector = d3.select('#filtro').on('change', onChange)
-
   const escalaY = d3
     .scaleLinear()
     .domain([0, d3.max(data, d => d.numero_deportistas)])
@@ -205,8 +195,6 @@ function atletasDataJoin(data) {
   xAxis.transition().duration(2000)
     .call(d3.axisBottom(escalaX).tickFormat(d3.format("d")))
     .attr("transform", "translate(" + margin.left * 4 + "," + (TREEMAP_HEIGHT) + ")")
-
-  // const circleTooltip = d3.select('#tooltip')
 
   g
     .selectAll("path")
@@ -261,7 +249,7 @@ function atletasDataJoin(data) {
           .transition()
           .duration(2000)
           .attr('r', 10)
-          .style("fill", "#69b3a2")
+          .style("fill", "#2c7bb6")
           .attr('id', d => 'circle-' + d.id)
           .attr("transform", 
             "translate(" + margin.left*4 + "," + margin.top + ")")
@@ -274,7 +262,7 @@ function atletasDataJoin(data) {
           .attr('cx', d => escalaX(d.Year))
           .attr('cy', d => escalaY(d.numero_deportistas))
           .attr('r', 10)
-          .style("fill", "#69b3a2")
+          .style("fill", "#2c7bb6")
           .attr("transform", 
             "translate(" + margin.left*4 + "," + margin.top + ")")
       },
@@ -291,7 +279,7 @@ function atletasDataJoin(data) {
   function mouseMoveCircle(event, d) {
     const circle = event.target.id;
     d3.select('#' + circle)
-      .attr("stroke", d => 'red')
+      .attr("stroke", d => '#d7191c')
       .attr("stroke-width", 3)
 
 
@@ -319,22 +307,16 @@ function atletasDataJoin(data) {
 
   function circleClick(event, d) {
     const circle = event.target.id;
-    console.log(`CIRCLE: ${circle}`)
     d3.select(".selected").classed("selected", false);
     d3.select('#' + circle).classed("selected", true);
-
+    d3.select('#informacion').style('opacity', 1)
     const keys = ["edad-promedio", "altura-promedio"]
-    d3.select('#edad-promedio').text(`Edad promedio: ${d.edad_promedio}`)
-    d3.select('#altura-promedio').text(`Altura promedio: ${d.altura_promedio}`)
-
-    console.log(infos)
+    d3.select('#edad-promedio').text(`Edad promedio: ${d.edad_promedio} años`).style('font-size', '125%')
+    d3.select('#altura-promedio').text(`Altura promedio: ${d.altura_promedio} cm`).style('font-size', '125%')
   }
 
   const circleTooltip = d3.select('#tooltip');
 
-  // const teamSelector = d3.select('#filtro').on('change', onChange(event))
-
-  // En el data viene el deporte
   function onChange(event) {
     const value = event.target.value
     sport = data[0].Sport
@@ -346,7 +328,6 @@ function atletasDataJoin(data) {
 
     const filteredSportFromBefore = atletasTodosEventoConPais.filter(a => sport === a.Sport);
     const filteredTeam = filteredSportFromBefore.filter(a => team === a.team);
-    // atletasDataJoin(filteredTeam)
   }
 
 };

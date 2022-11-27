@@ -146,16 +146,10 @@ li span {
   margin-top: 5%;
   display: flex;
   flex-flow: column;
-  /* border: 2px solid #fdae61; */
-  /* background-color: #fdae61; */
   border-radius: 20px;
 }
 
-#info-container p {
-  /* font-size: 150%; */
-}
-
-.year-info{
++13.year-info{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
